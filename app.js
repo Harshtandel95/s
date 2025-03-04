@@ -21,7 +21,6 @@ app.use(cors({
 app.use(morgan('dev')); // HTTP request logger
 app.use(express.json()); // Parse JSON bodies
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
-
 // Connect to MongoDB
 mongoose.connect(MONGODB_URI)
   .then(() => {
