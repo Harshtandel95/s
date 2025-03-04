@@ -1,0 +1,14 @@
+const express = require('express');
+const router = express.Router();
+const companyController = require('./controller');
+router.post('/companies', companyController.createCompany);
+router.get('/companies', companyController.getAllCompanies);
+router.get('/companies/:id', companyController.getCompanyById);
+router.put('/companies/:id', companyController.updateCompany);
+router.delete('/companies/:id', companyController.deleteCompany);
+router.post('/companies/:id/generators/:type', companyController.addGenerator);
+router.put('/companies/:id/generators/:type/:generatorId', companyController.updateGenerator);
+router.delete('/companies/:id/generators/:type/:generatorId', companyController.deleteGenerator);
+router.post('/articles', companyController.getArticles);
+router.post('/updateUrlAndId/:id',companyController.updateUrlAndId);
+module.exports = router;
