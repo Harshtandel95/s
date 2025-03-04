@@ -15,7 +15,6 @@ const MONGODB_URI = process.env.MONGODB_URI;
 // Improved CORS configuration
 const corsOptions = {
   origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
     
     // List of allowed origins
