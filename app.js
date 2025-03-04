@@ -13,22 +13,16 @@ const PORT = process.env.PORT;
 const MONGODB_URI = process.env.MONGODB_URI;
 
 // Improved CORS configuration
-  // Add this to handle CORS preflight requests
-  // Add this to handle CORS preflight requests
-  app.use(cors());
-
-  // Option 2: Specify allowed origins
-  app.use(cors({
-    origin: ['http://localhost:5173']
-  }));
+const corsOptions = {
+  origin: 'http://localhost:5173',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   
-  // Option 3: More granular CORS configuration
-  app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'http://localhost:5173');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-    next();
-  });
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+
+// Apply CORS middleware
+app.use(cors(corsOptions));
 
 // Other middleware
 app.use(morgan('dev')); // HTTP request logger
