@@ -1,26 +1,46 @@
-// app.js
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const morgan = require('morgan');
 require('dotenv').config();
 const companyRoutes = require('./routes');
+
 // Initialize express app
 const app = express();
+
 // Environment variables
-const PORT = process.env.PORT ;
+const PORT = process.env.PORT;
 const MONGODB_URI = process.env.MONGODB_URI;
-console.log(MONGODB_URI);
-// Middleware
-app.use(cors({
-  origin: '*',  // Allow all origins
+
+// Improved CORS configuration
+const corsOptions = {
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    // List of allowed origins
+    const allowedOrigins = ['http://localhost:3000', ];
+    
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true
-}));
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+
+// Apply CORS middleware
+app.use(cors(corsOptions));
+
+// Other middleware
 app.use(morgan('dev')); // HTTP request logger
 app.use(express.json()); // Parse JSON bodies
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
+
 // Connect to MongoDB
 mongoose.connect(MONGODB_URI)
   .then(() => {
