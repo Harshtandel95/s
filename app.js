@@ -16,7 +16,6 @@ const MONGODB_URI = process.env.MONGODB_URI;
 const corsOptions = {
   origin: 'http://localhost:5173',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  
   credentials: true,
   optionsSuccessStatus: 200
 };
