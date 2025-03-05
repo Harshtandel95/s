@@ -14,7 +14,7 @@ const MONGODB_URI = process.env.MONGODB_URI;
 
 // Improved CORS configuration
 const corsOptions = {
-  origin: 'https://c-dusky-phi.vercel.app',
+  origin: 'https://composer-eight.vercel.app',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   credentials: true,
   optionsSuccessStatus: 200
